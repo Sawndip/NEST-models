@@ -1,0 +1,20 @@
+#!/bin/bash
+echo "Running bootstrap.sh"
+./bootstrap.sh
+
+DIR="mmb"
+if [ -d ${DIR} ];then
+	echo "Cleaning mmb."
+	rm -rf ./mmb/*
+else
+	echo "Creating mmb dir"
+	mkdir ./mmb
+fi
+echo "Entering mmb dir"
+cd mmb
+../configure --with-nest=/usr/local/bin/nest-config
+
+echo "Making mmb"
+make 2>errors.log
+cat errors.log
+
